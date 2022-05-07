@@ -1,0 +1,15 @@
+---
+ - hosts: all
+   become: true
+     
+   tasks:
+     - name: Add the HashiCorp GPG key
+       shell: "curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -"
+     
+     - name: Add the official HashiCorp Linux repository 
+       shell: sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+
+     - name: Update and install
+       shell: "sudo apt-get update && apt install nomad"
+     
+
